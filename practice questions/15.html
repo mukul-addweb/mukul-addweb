@@ -1,0 +1,22 @@
+<html>
+
+<head>
+    <title>WAP to read a number and sum of its digits(using while loop)</title>
+</head>
+
+<body>
+    <script>
+        var value = window.prompt("enter numbers"),
+            sum = 0;
+
+        while (value) {
+            sum += value % 10;
+            value = Math.floor(value / 10);
+        }
+
+        console.log(sum);
+        document.write(sum);
+    </script>
+</body>
+
+</html>

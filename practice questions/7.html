@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <title>WAP to read cost price and selling price of an item and find out how much loss or profit occurs.
+    </title>
+</head>
+
+<body>
+    <script>
+        function Profit(costPrice, sellingPrice) {
+            let profit = (sellingPrice - costPrice);
+
+            return profit;
+        }
+
+
+        function Loss(costPrice, sellingPrice) {
+            let Loss = (costPrice - sellingPrice);
+
+            return Loss;
+        }
+
+        let costPrice = 2100,
+            sellingPrice = 2000;
+
+        if (sellingPrice == costPrice)
+            document.write("No profit nor Loss");
+
+        else if (sellingPrice > costPrice)
+            document.write(Profit(costPrice, sellingPrice) + " Profit ");
+
+        else
+            document.write(Loss(costPrice, sellingPrice) + " Loss ");
+    </script>
+
+</body>
+
+</html>

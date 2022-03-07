@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <title>WAP to read four numbers and find out maximum.</title>
+</head>
+
+<body>
+    <script>
+        var a, b, c, d;
+        a = window.prompt("enter 1 number");
+        b = window.prompt("enter 2 number");
+        c = window.prompt("enter 3 number");
+        d = window.prompt("enter 4 number");
+        if (a > b && a > c && a > d) {
+            window.alert(a + "is maximum");
+        } else if (b > c && b > d) {
+            window.alert(b + "is maximum");
+        } else if (c > b && c > d) {
+            window.alert(c + "is maximum");
+        } else if (d > c) {
+            window.alert(c + "is maximum");
+        }
+    </script>
+</body>
+
+</html>

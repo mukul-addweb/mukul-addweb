@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HTML5 Canvas - Linear gradient example</title>
+</head>
+<body>
+<canvas id="demoCanvas" width="500" height="600"></canvas>
+<script>
+var canvas = document.getElementById("demoCanvas");  
+if (canvas.getContext)   
+{  
+var ctx = canvas.getContext("2d");         
+var gradient = ctx.createLinearGradient(10, 90, 200, 90);
+gradient.addColorStop(0, 'black');
+gradient.addColorStop(1, 'white');
+ctx.fillStyle = gradient;
+ctx.fillRect(10, 10, 200, 250);             
+}
+</script>
+</body> 
+</html>

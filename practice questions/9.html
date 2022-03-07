@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title>WAP to read character and find out whether it is upper case latter, lower case latter, digit or special symbol.
+    </title>
+</head>
+
+<body>
+    <script>
+        function check(ch) {
+            if (ch >= "A" && ch <= "Z")
+                document.write(ch +
+                    " is an UpperCase character <br>");
+            else if (ch >= "a" && ch <= "z")
+                document.write(ch +
+                    " is an LowerCase character <br>");
+            else document.write(ch +
+                " is not an aplhabetic character <br>");
+        }
+
+
+        var ch;
+
+        ch = "A";
+
+        check(ch);
+
+
+        ch = "a";
+
+
+        check(ch);
+
+
+        ch = "0";
+
+        check(ch);
+    </script>
+
+</body>
+
+</html>

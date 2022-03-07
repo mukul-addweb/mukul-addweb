@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sample arcs example</title>
+</head>
+<body>
+<canvas id="DemoCanvas" width="300" height="600"></canvas>  
+<script>
+var ctx = document.getElementById('DemoCanvas').getContext('2d');
+ctx.fillStyle = "blue";
+ctx.beginPath();
+ctx.moveTo(30, 30);
+ctx.lineTo(150, 150);
+ctx.bezierCurveTo(60, 70, 60, 70, 70, 180); 
+ctx.lineTo(30, 30);
+ctx.fill();
+</script>
+</body> 
+</html> 

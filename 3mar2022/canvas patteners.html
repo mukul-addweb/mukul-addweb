@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head><title>HTML5 Canvas - shadow</title>
+</head>
+<body>
+<canvas id="DemoCanvas1" width="500" height="600"></canvas> 
+<canvas id="DemoCanvas2" width="500" height="600"></canvas>
+<script>
+var canvas1 = document.getElementById("DemoCanvas1");
+if (canvas1.getContext) 
+{
+var ctx = canvas1.getContext('2d');
+ctx.shadowColor = "black";
+ctx.shadowBlur = 6;
+ctx.shadowOffsetX = 6;
+ctx.shadowOffsetY = 6;
+ctx.shadowColor = "orange";
+ctx.strokeRect(25, 25, 200, 200);
+ctx.shadowColor = "green";
+ctx.strokeRect(50, 50, 200, 200);
+ctx.shadowColor = "blue";
+ctx.strokeRect(75, 75, 200, 200);
+ctx.shadowColor = "red";
+ctx.strokeRect(100, 100, 200, 200);
+}
+var canvas2 = document.getElementById("DemoCanvas2");
+if (canvas2.getContext) 
+{
+ var ctx = canvas2.getContext('2d');
+ ctx.rect(100, 40, 200, 100);
+ ctx.fillStyle = 'green';
+ ctx.shadowColor = '#898';
+ ctx.shadowBlur = 20;
+ ctx.shadowOffsetX = 20;
+ ctx.shadowOffsetY = 20;
+ ctx.fill();
+}
+</script>
+</body> 
+</html>

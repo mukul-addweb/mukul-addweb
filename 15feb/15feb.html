@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <title>JS Page</title>
+    <script type="text/javascript">
+        function add() {
+            var a = parseInt(document.form1.fvalue.value);
+            var b = parseInt(document.getElementById("svalue").value);
+            var c = a + b;
+            document.write("The total is " + c);
+        }
+    </script>
+</head>
+
+<body>
+    <form id="form1" name="form1">
+        First Value:<input type="text" id="fvalue" /><br /> Second Value:<input type="text" id="svalue" /><br />
+        <input type="button" id="btn1" value="click me" onclick="add()" />
+    </form>
+</body>
+
+</html>
+
+<html>
+
+<head>
+    <title>JS Page</title>
+    <script type="text/javascript">
+        function add() {
+            var a = parseInt(document.form1.fvalue.value);
+            var b = parseInt(document.getElementById("svalue").value);
+            var c = a + b;
+
+            document.getElementById("result").innerHTML = c;
+        }
+    </script>
+</head>
+
+<body>
+    <form id="form1" name="form1">
+        First Value:<input type="text" id="fvalue" /><br /> Second Value:<input type="text" id="svalue" /><br />
+        <input type="button" id="btn1" value="click me" onclick="add()" />
+    </form>
+    <b id="result">
+
+    </b>
+</body>
+
+</html>

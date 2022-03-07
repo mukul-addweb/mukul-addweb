@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>string method</title>
+</head>
+
+<body>
+
+    <p id="demo"></p><br/>
+    <p id="demo1"></p><br/>
+    <p id="demo2"></p><br/>
+    <p id="demo3"></p><br/>
+    <p id="demo4"></p><br/>
+    <p id="demo5"></p><br/>
+    <p id="demo6"></p><br/>
+    <p id="demo7"></p><br/>
+    <p id="demo8"></p><br/>
+    <p id="demo9"></p><br/>
+    <p id="demo10"></p><br/>
+    <p id="demo11"></p><br/>
+    <p id="demo12"></p><br/>
+
+    <script>
+        let str = "lion, tiger, wolf, hyenas";
+        document.getElementById("demo").innerHTML = str.slice(-9);
+        document.getElementById("demo1").innerHTML = str.substring(9, 12);
+        document.getElementById("demo2").innerHTML = str.replace("Banana", "Orange");
+        var text1 = "mukul";
+        document.getElementById("demo3").innerHTML = text1.toLowerCase();
+        document.getElementById("demo4").innerHTML = text1.toUpperCase();
+        var text2 = "sharma";
+        document.getElementById("demo5").innerHTML = text1.concat(" ", text2);
+        var text3 = "   mukul sharma  ";
+        document.getElementById("demo6").innerHTML = text3.trim();
+        document.getElementById("demo7").innerHTML = text2.charAt(3);
+        document.getElementById("demo8").innerHTML = text2.charCodeAt(3);
+        let text4 = "5";
+        document.getElementById("demo9").innerHTML = text4.padStart(4, 0);
+        document.getElementById("demo10").innerHTML = text4.padEnd(4, 0);
+        let text5 = "a,b,c,d,e,f";
+        const myArray = text5.split(",");
+        document.getElementById("demo11").innerHTML = myArray[0];
+        let text6 = "a,b,c,d,e,f,g,h";
+        const myArray1 = text6.split("|");
+        document.getElementById("demo12").innerHTML = myArray1[0];
+    </script>
+
+</body>
+
+</html>

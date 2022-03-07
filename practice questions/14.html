@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <title>. WAP to read a number and print its reverse.(using while loop)</title>
+
+</head>
+
+<body>
+    <script>
+        let rev = 0;
+        let num = window.prompt("entrr a number");
+        let lastDigit;
+
+        while (num != 0) {
+            lastDigit = num % 10;
+            rev = rev * 10 + lastDigit;
+            num = Math.floor(num / 10);
+        }
+
+        console.log("Reverse number : " + rev);
+
+        document.write(rev);
+    </script>
+</body>
+
+</html>

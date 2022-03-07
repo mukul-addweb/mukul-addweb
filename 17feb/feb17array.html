@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Read an array and print sum of its elements</title>
+</head>
+
+<body>
+    <script>
+        var array = [1, 2, 3, 4, 5];
+        var sum = array.reduce(function(a, b) {
+            return a + b;
+        }, 0);
+
+        document.write(sum);
+    </script>
+</body>
+
+</html>
+
+
+<html>
+
+<head>
+    <title>Read an array and print its reverse.</title>
+</head>
+
+<body>
+    <script>
+        const arr = [1, 2, 3, 4];
+        arr.reverse();
+        document.write(arr);
+    </script>
+</body>
+
+</html>
+
+<html>
+
+<head>
+    <title>Read an array and count total no. of even and odd eliments.</title>
+</head>
+
+<body>
+    <script>
+        function CountingEvenOdd(arr, arr_size) {
+            let even_count = 0;
+            let odd_count = 0;
+
+
+            for (let i = 0; i < arr_size; i++) {
+
+                if (arr[i] & 1 == 1)
+                    odd_count++;
+                else
+                    even_count++;
+            }
+
+            document.write("Number of even elements = " + even_count +
+                "<br>" + "Number of odd elements = " + odd_count);
+        }
+
+
+
+        let arr = [2, 8, 4, 5, 6];
+        let n = arr.length;
+
+
+        CountingEvenOdd(arr, n);
+    </script>
+
+</body>
+
+</html>
+
+
+
+<html>
+
+<head>
+    <title>Read an array and find our max and second max.
+    </title>
+</head>
+
+<body>
+    <script>
+        function print2largest(arr, arr_size) {
+            let i, first, second;
+
+
+            if (arr_size < 2) {
+                document.write(" Invalid Input ");
+                return;
+            }
+
+
+            arr.sort();
+
+
+            for (i = arr_size - 2; i >= 0; i--) {
+
+                if (arr[i] != arr[arr_size - 1]) {
+                    document.write("The second largest element is " + arr[i]);
+                    return;
+                }
+            }
+
+            document.write("There is no second largest element<br>");
+        }
+
+
+        let arr = [12, 35, 1, 34.5, 34, 1];
+        let n = arr.length;
+        print2largest(arr, n);
+    </script>
+
+</body>
+
+</html>
