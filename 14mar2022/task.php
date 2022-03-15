@@ -1,16 +1,18 @@
 <?php
-
-
- $a=$_POST['username'];
- echo "name=".$a."<br><br>";
-?>
-
-
-<html>
-
-<body>
- <form method="post" action="taskcookies.php">
-     <input type="submit" value="logout">
- </form>
-</body>
-</html>
+            error_reporting(0);
+            if(!isset($_COOKIE['username']))
+            {
+                header('Location:taskcookies.php');
+            }
+            else
+            {
+                echo $_COOKIE['username']."<br><br>";
+                
+                echo "<form method=post><input type=submit value=logout name=logout></form>";
+            }
+            if($_POST['logout'])
+            {
+                setcookie("username",'',time()-60);
+                header('Location:taskcookies.php');
+            }
+        ?>
