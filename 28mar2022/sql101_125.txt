@@ -1,0 +1,194 @@
+MariaDB [(none)]> use department;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [department]> select * from department;
++---------+--------+----------+----------+--------+--------------+-----------+--------------+
+| dept_no | emp_no | emp_name | job      | salary | annualsalary | commision | joining_date |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+
+|      10 |    101 | ram      | cleark   |   3500 |        50000 |      8000 | 2022-03-24   |
+|      20 |    110 | gita     | manager  |   3000 |        40000 |      4000 | 1990-05-24   |
+|      40 |    120 | mukesh   | salseman |  10000 |       140000 |     20000 | 1991-04-30   |
+|      50 |    140 | ronak    | analyst  |  10000 |       140000 |     20000 | 2001-10-20   |
+|      60 |    150 | abhay    | analyst  |  10000 |       140000 |     20000 | 2008-12-03   |
+|      70 |    220 | sagar    | salseman |   1000 |        17000 |      5000 | 1880-11-30   |
+|     100 |    250 | shyam    | cleark   |  35000 |       500000 |     80000 | 2021-10-09   |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+
+7 rows in set (0.000 sec)
+
+MariaDB [department]> select emp_name from department where job='manager';
++----------+
+| emp_name |
++----------+
+| gita     |
++----------+
+1 row in set (0.000 sec)
+
+MariaDB [department]> select emp_name from department where max(salary);
+ERROR 1111 (HY000): Invalid use of group function
+MariaDB [department]> select emp_name from department where max('salary');
+ERROR 1111 (HY000): Invalid use of group function
+MariaDB [department]> select emp_name from department where salary=max('salary');
+ERROR 1111 (HY000): Invalid use of group function
+MariaDB [department]> select emp_name from department where salary=(select max(salary)from department);
++----------+
+| emp_name |
++----------+
+| shyam    |
++----------+
+1 row in set (0.000 sec)
+
+MariaDB [department]> select emp_name from department where salary =(select (max(salary)+min(salary))/2 from department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [department]> select emp_name from department where salar=(select(max(salary)+min(salary))/2 from department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [department]> select emp_name from department where salary=(select(max(salary)+min(salary))/2 from department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [department]> select emp_name from department where salary=(select avg(salary) from department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [department]> select avg(salary) from department;
++-------------+
+| avg(salary) |
++-------------+
+|  10357.1429 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [department]> select emp_name from department where salary=(select avg(max(salary)+min(salary)) from department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [department]> select emp_name from department where salary=(select (max(d.salary)+min(d.salary))/2 from department d;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [department]> select emp_name from department where salary=(select (max(d.salary)+min(d.salary))/2 from department d);
+Empty set (0.000 sec)
+
+MariaDB [department]> alter table department add grade bigint(10);
+Query OK, 0 rows affected (0.012 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [department]> update department set grade=1 where emp_no=101;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [department]> update department set grade=2 where emp_no=110;
+Query OK, 1 row affected (0.008 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [department]> update department set grade=3 where emp_no=120;
+Query OK, 1 row affected (0.008 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [department]> update department set grade=1 where emp_no=140;
+Query OK, 1 row affected (0.008 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [department]> update department set grade=2 where emp_no=150;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [department]> update department set grade=4 where emp_no=220;
+Query OK, 1 row affected (0.009 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [department]> update department set grade=3 where emp_no=250;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [department]> select * from department;
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+| dept_no | emp_no | emp_name | job      | salary | annualsalary | commision | joining_date | grade |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+|      10 |    101 | ram      | cleark   |   3500 |        50000 |      8000 | 2022-03-24   |     1 |
+|      20 |    110 | gita     | manager  |   3000 |        40000 |      4000 | 1990-05-24   |     2 |
+|      40 |    120 | mukesh   | salseman |  10000 |       140000 |     20000 | 1991-04-30   |     3 |
+|      50 |    140 | ronak    | analyst  |  10000 |       140000 |     20000 | 2001-10-20   |     1 |
+|      60 |    150 | abhay    | analyst  |  10000 |       140000 |     20000 | 2008-12-03   |     2 |
+|      70 |    220 | sagar    | salseman |   1000 |        17000 |      5000 | 1880-11-30   |     4 |
+|     100 |    250 | shyam    | cleark   |  35000 |       500000 |     80000 | 2021-10-09   |     3 |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+7 rows in set (0.000 sec)
+
+MariaDB [department]> 
+
+Database changed
+MariaDB [department]> select * from department a where mod (a.salary,2)!=0;
+Empty set (0.001 sec)
+
+MariaDB [department]> select * from department a where mod (a.salary,2)=0;
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+| dept_no | emp_no | emp_name | job      | salary | annualsalary | commision | joining_date | grade |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+|      10 |    101 | ram      | cleark   |   3500 |        50000 |      8000 | 2022-03-24   |     1 |
+|      20 |    110 | gita     | manager  |   3000 |        40000 |      4000 | 1990-05-24   |     2 |
+|      40 |    120 | mukesh   | salseman |  10000 |       140000 |     20000 | 1991-04-30   |     3 |
+|      50 |    140 | ronak    | analyst  |  10000 |       140000 |     20000 | 2001-10-20   |     1 |
+|      60 |    150 | abhay    | analyst  |  10000 |       140000 |     20000 | 2008-12-03   |     2 |
+|      70 |    220 | sagar    | salseman |   1000 |        17000 |      5000 | 1880-11-30   |     4 |
+|     100 |    250 | shyam    | cleark   |  35000 |       500000 |     80000 | 2021-10-09   |     3 |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+7 rows in set (0.001 sec)
+
+MariaDB [department]> select  * from department a where length (a.salary)>=4;
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+| dept_no | emp_no | emp_name | job      | salary | annualsalary | commision | joining_date | grade |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+|      10 |    101 | ram      | cleark   |   3500 |        50000 |      8000 | 2022-03-24   |     1 |
+|      20 |    110 | gita     | manager  |   3000 |        40000 |      4000 | 1990-05-24   |     2 |
+|      40 |    120 | mukesh   | salseman |  10000 |       140000 |     20000 | 1991-04-30   |     3 |
+|      50 |    140 | ronak    | analyst  |  10000 |       140000 |     20000 | 2001-10-20   |     1 |
+|      60 |    150 | abhay    | analyst  |  10000 |       140000 |     20000 | 2008-12-03   |     2 |
+|      70 |    220 | sagar    | salseman |   1000 |        17000 |      5000 | 1880-11-30   |     4 |
+|     100 |    250 | shyam    | cleark   |  35000 |       500000 |     80000 | 2021-10-09   |     3 |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+7 rows in set (0.000 sec)
+
+MariaDB [department]> select  * from department a where length (a.salary)>=2;
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+| dept_no | emp_no | emp_name | job      | salary | annualsalary | commision | joining_date | grade |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+|      10 |    101 | ram      | cleark   |   3500 |        50000 |      8000 | 2022-03-24   |     1 |
+|      20 |    110 | gita     | manager  |   3000 |        40000 |      4000 | 1990-05-24   |     2 |
+|      40 |    120 | mukesh   | salseman |  10000 |       140000 |     20000 | 1991-04-30   |     3 |
+|      50 |    140 | ronak    | analyst  |  10000 |       140000 |     20000 | 2001-10-20   |     1 |
+|      60 |    150 | abhay    | analyst  |  10000 |       140000 |     20000 | 2008-12-03   |     2 |
+|      70 |    220 | sagar    | salseman |   1000 |        17000 |      5000 | 1880-11-30   |     4 |
+|     100 |    250 | shyam    | cleark   |  35000 |       500000 |     80000 | 2021-10-09   |     3 |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+7 rows in set (0.000 sec)
+
+MariaDB [department]> select  * from department a where length(a.salary)>=2;
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+| dept_no | emp_no | emp_name | job      | salary | annualsalary | commision | joining_date | grade |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+|      10 |    101 | ram      | cleark   |   3500 |        50000 |      8000 | 2022-03-24   |     1 |
+|      20 |    110 | gita     | manager  |   3000 |        40000 |      4000 | 1990-05-24   |     2 |
+|      40 |    120 | mukesh   | salseman |  10000 |       140000 |     20000 | 1991-04-30   |     3 |
+|      50 |    140 | ronak    | analyst  |  10000 |       140000 |     20000 | 2001-10-20   |     1 |
+|      60 |    150 | abhay    | analyst  |  10000 |       140000 |     20000 | 2008-12-03   |     2 |
+|      70 |    220 | sagar    | salseman |   1000 |        17000 |      5000 | 1880-11-30   |     4 |
+|     100 |    250 | shyam    | cleark   |  35000 |       500000 |     80000 | 2021-10-09   |     3 |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+7 rows in set (0.000 sec)
+
+MariaDB [department]> select  * from department where salary like '____';
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+| dept_no | emp_no | emp_name | job      | salary | annualsalary | commision | joining_date | grade |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+|      10 |    101 | ram      | cleark   |   3500 |        50000 |      8000 | 2022-03-24   |     1 |
+|      20 |    110 | gita     | manager  |   3000 |        40000 |      4000 | 1990-05-24   |     2 |
+|      70 |    220 | sagar    | salseman |   1000 |        17000 |      5000 | 1880-11-30   |     4 |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [department]> select  * from department a where length(a.salary)<=2;
+Empty set (0.000 sec)
+
+MariaDB [department]> select  * from department a where length(a.salary)<=4;
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+| dept_no | emp_no | emp_name | job      | salary | annualsalary | commision | joining_date | grade |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+|      10 |    101 | ram      | cleark   |   3500 |        50000 |      8000 | 2022-03-24   |     1 |
+|      20 |    110 | gita     | manager  |   3000 |        40000 |      4000 | 1990-05-24   |     2 |
+|      70 |    220 | sagar    | salseman |   1000 |        17000 |      5000 | 1880-11-30   |     4 |
++---------+--------+----------+----------+--------+--------------+-----------+--------------+-------+
+3 rows in set (0.000 sec)

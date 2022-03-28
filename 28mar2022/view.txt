@@ -1,0 +1,45 @@
+Database changed
+MariaDB [rdbms]> create view aws as select h.hr_id,h.hr_name,o.office_id,o.office_name from hr h join office o on h.hr_id=o.office_id;
+Query OK, 0 rows affected (0.002 sec)
+
+MariaDB [rdbms]> select * from aws;
++-------+----------+-----------+-------------+
+| hr_id | hr_name  | office_id | office_name |
++-------+----------+-----------+-------------+
+|  1001 | ridihika |      1001 | xyz         |
+|  1002 | akanshsa |      1002 | wxyz        |
+|  1003 | ram      |      1003 | xyz1        |
+|  1004 | abhay    |      1004 | xyz2        |
+|  1005 | shayam   |      1005 | xyz3        |
++-------+----------+-----------+-------------+
+5 rows in set (0.006 sec)
+
+MariaDB [rdbms]> create view ppp as select * from hr where address='qwqwio';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [rdbms]> select * from ppp;
++-----+-------+---------+----------------+----------+---------+
+| sno | hr_id | hr_name | email          | phone no | address |
++-----+-------+---------+----------------+----------+---------+
+|   4 |  1004 | abhay   | qxyz@gmail.com |   321545 | qwqwio  |
++-----+-------+---------+----------------+----------+---------+
+1 row in set (0.006 sec)
+
+
+MariaDB [rdbms]> alter view aws as select h.hr_id,h.hr_name,o.office_id  from hr h join office o on h.hr_id=o.office_id;
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [rdbms]> select * from aws;
++-------+----------+-----------+
+| hr_id | hr_name  | office_id |
++-------+----------+-----------+
+|  1001 | ridihika |      1001 |
+|  1002 | akanshsa |      1002 |
+|  1003 | ram      |      1003 |
+|  1004 | abhay    |      1004 |
+|  1005 | shayam   |      1005 |
++-------+----------+-----------+
+5 rows in set (0.001 sec)
+
+MariaDB [rdbms]> 
+

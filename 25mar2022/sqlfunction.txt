@@ -1,0 +1,219 @@
+mukul@mukul:~$ sudo /opt/lampp/bin/mysql -u root -p
+[sudo] password for mukul: 
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 322
+Server version: 10.4.22-MariaDB Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use rdbms
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [rdbms]> select ascii('2');
++------------+
+| ascii('2') |
++------------+
+|         50 |
++------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select ascii('100');
++--------------+
+| ascii('100') |
++--------------+
+|           49 |
++--------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select ascii('mu');
++-------------+
+| ascii('mu') |
++-------------+
+|         109 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select ascii('mukul');
++----------------+
+| ascii('mukul') |
++----------------+
+|            109 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select bin(12);
++---------+
+| bin(12) |
++---------+
+| 1100    |
++---------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select bin(99);
++---------+
+| bin(99) |
++---------+
+| 1100011 |
++---------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select bit length('text'); 
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '('text')' at line 1
+MariaDB [rdbms]> select bit_length('text'); 
++--------------------+
+| bit_length('text') |
++--------------------+
+|                 32 |
++--------------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select bit_length('mukul'); 
++---------------------+
+| bit_length('mukul') |
++---------------------+
+|                  40 |
++---------------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select char (77,121,83,81,76);
++------------------------+
+| char (77,121,83,81,76) |
++------------------------+
+| MySQL                  |
++------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select char (77,121,83,81,'76');
++--------------------------+
+| char (77,121,83,81,'76') |
++--------------------------+
+| MySQL                    |
++--------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select char_length ('shhgfyfghfgwhgfwjfgbwjyfg');
++-------------------------------------------+
+| char_length ('shhgfyfghfgwhgfwjfgbwjyfg') |
++-------------------------------------------+
+|                                        25 |
++-------------------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select concat('my','name','is','mukul','sharma');
++-------------------------------------------+
+| concat('my','name','is','mukul','sharma') |
++-------------------------------------------+
+| mynameismukulsharma                       |
++-------------------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select concat('my','name','is',mukul,'sharma');
+ERROR 1054 (42S22): Unknown column 'mukul' in 'field list'
+MariaDB [rdbms]> select concat('my','name','is',mukul','sharma');
+    '> ;
+    '> '
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'sharma');
+;
+'' at line 1
+MariaDB [rdbms]> concat ws('+','1','man','army');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'concat ws('+','1','man','army')' at line 1
+MariaDB [rdbms]> concat ws('+','one','man','army');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'concat ws('+','one','man','army')' at line 1
+MariaDB [rdbms]> concat ws(',','one','man','army');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'concat ws(',','one','man','army')' at line 1
+MariaDB [rdbms]> select concat ws('+','one','man','army');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '('+','one','man','army')' at line 1
+MariaDB [rdbms]> select concat(',','one','man','army');
++--------------------------------+
+| concat(',','one','man','army') |
++--------------------------------+
+| ,onemanarmy                    |
++--------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select concat_ws(',','one','man','army');
++-----------------------------------+
+| concat_ws(',','one','man','army') |
++-----------------------------------+
+| one,man,army                      |
++-----------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select concat_ws('+','one','man','army');
++-----------------------------------+
+| concat_ws('+','one','man','army') |
++-----------------------------------+
+| one+man+army                      |
++-----------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select elt (1,'a','bb','ccc','dddd');
++-------------------------------+
+| elt (1,'a','bb','ccc','dddd') |
++-------------------------------+
+| a                             |
++-------------------------------+
+1 row in set (0.006 sec)
+
+MariaDB [rdbms]> select elt (2,'a','bb','ccc','dddd');
++-------------------------------+
+| elt (2,'a','bb','ccc','dddd') |
++-------------------------------+
+| bb                            |
++-------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select elt (4,'a','bb','ccc','dddd');
++-------------------------------+
+| elt (4,'a','bb','ccc','dddd') |
++-------------------------------+
+| dddd                          |
++-------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> select field (4,'a','bb','ccc','dddd');
++---------------------------------+
+| field (4,'a','bb','ccc','dddd') |
++---------------------------------+
+|                               0 |
++---------------------------------+
+1 row in set, 4 warnings (0.000 sec)
+
+MariaDB [rdbms]> select format (1212,25252,40);
++----------------------------------------------+
+| format (1212,25252,40)                       |
++----------------------------------------------+
+| 1,212.00000000000000000000000000000000000000 |
++----------------------------------------------+
+1 row in set, 1 warning (0.000 sec)
+
+MariaDB [rdbms]> select insert ('qua',2,5,''wait');
+    '> select insert ('quagfhgfhgfh',2,5,''wait');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'wait');
+select insert ('quagfhgfhgfh',2,5,''wait')' at line 1
+MariaDB [rdbms]> select insert('quadratic',3,4,''wait');
+    '> select insert('quadratic',3,4,'wait');
+    '> ;
+    '> '
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'wait');
+select insert('quadratic',3,4,'wait');
+;
+'' at line 1
+MariaDB [rdbms]> select insert('quadratic',3,4,'wait');
++--------------------------------+
+| insert('quadratic',3,4,'wait') |
++--------------------------------+
+| quwaittic                      |
++--------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> Ctrl-C -- exit!
+Aborted
+mukul@mukul:~$ 

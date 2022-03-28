@@ -1,0 +1,216 @@
+Database changed
+MariaDB [department]> select empname from dept where salary= (select max(salary) from dept);
++---------+
+| empname |
++---------+
+| mukul   |
++---------+
+1 row in set (0.093 sec)
+
+MariaDB [department]> select empname,eno from dept where job='clerk' and salary=(select max(salary) from dept where job='clerk');
++---------+-----+
+| empname | eno |
++---------+-----+
+| saloni  | 101 |
++---------+-----+
+1 row in set (0.002 sec)
+
+MariaDB [department]> select empname from dept where job='salesman' and salary>(select max(salary) from dept where job='clerk');
+Empty set (0.001 sec)
+
+MariaDB [department]> select empname from dept where salary>=(select salary from dept where empname = 'meenal') or salary<=(select salary from dept where empname='mukul') and job='clerk';
++---------+
+| empname |
++---------+
+| saloni  |
+| meenal  |
+| mukul   |
+| shyam   |
++---------+
+4 rows in set (0.003 sec)
+
+MariaDB [department]> select empname from dept where salary>=(select salary from dept where empname = 'meenal') or salary<=(select salary from dept where empname='mukul');
++---------+
+| empname |
++---------+
+| saloni  |
+| shruti  |
+| meenal  |
+| mukul   |
+| shyam   |
++---------+
+5 rows in set (0.002 sec)
+
+MariaDB [department]> select empname,max(salary) from dpet group by job;
+ERROR 1146 (42S02): Table 'department.dpet' doesn't exist
+MariaDB [department]> select empname,max(salary) from dept group by job;
++---------+-------------+
+| empname | max(salary) |
++---------+-------------+
+| mukul   |       13000 |
+| saloni  |       11000 |
+| meenal  |       12000 |
+| shruti  |       10000 |
++---------+-------------+
+4 rows in set (0.002 sec)
+
+MariaDB [department]> select empname,max(salary) from dept group by job;
++---------+-------------+
+| empname | max(salary) |
++---------+-------------+
+| mukul   |       13000 |
+| saloni  |       11000 |
+| meenal  |       12000 |
+| shruti  |       10000 |
++---------+-------------+
+4 rows in set (0.002 sec)
+
+MariaDB [department]> select empname from dept where job='accounting';
+Empty set (0.002 sec)
+
+MariaDB [department]> select job from dept group by job having sum(salary)>(select max(salary) from dept where job='manager');
++---------+
+| job     |
++---------+
+| analyst |
+| clerk   |
++---------+
+2 rows in set (0.003 sec)
+
+MariaDB [department]> select empname from dept where dept =10 and salary > all(select salary from dept where dept!=10);
+ERROR 1054 (42S22): Unknown column 'dept' in 'where clause'
+MariaDB [department]> select empname from dept where dept =10 and salary > all(select salary from dept where deptno!=10);
+ERROR 1054 (42S22): Unknown column 'dept' in 'where clause'
+MariaDB [department]> select empname from dept where deptno =10 and salary > all(select salary from dept where deptno!=10);
+Empty set (0.001 sec)
+
+MariaDB [department]> select upper(empname) from dept;
++----------------+
+| upper(empname) |
++----------------+
+| SALONI         |
+| SHRUTI         |
+| MEENAL         |
+| MUKUL          |
+| SHYAM          |
++----------------+
+5 rows in set (0.002 sec)
+
+MariaDB [department]> select lower(empname) from dept;
++----------------+
+| lower(empname) |
++----------------+
+| saloni         |
+| shruti         |
+| meenal         |
+| mukul          |
+| shyam          |
++----------------+
+5 rows in set (0.001 sec)
+
+MariaDB [department]> select proper(empname) from dept;
+ERROR 1558 (HY000): Column count of mysql.proc is wrong. Expected 21, found 20. Created with MariaDB 100108, now running 100422. Please use mysql_upgrade to fix this error
+MariaDB [department]> select length(empname) from dept;
++-----------------+
+| length(empname) |
++-----------------+
+|               6 |
+|               6 |
+|               6 |
+|               5 |
+|               5 |
++-----------------+
+5 rows in set (0.001 sec)
+
+MariaDB [department]> 
+MariaDB [department]> select length('krishna');
++-------------------+
+| length('krishna') |
++-------------------+
+|                 7 |
++-------------------+
+1 row in set (0.001 sec)
+
+MariaDB [department]> select concat(empname,eno) from dept;
++---------------------+
+| concat(empname,eno) |
++---------------------+
+| saloni101           |
+| shruti102           |
+| meenal103           |
+| mukul104            |
+| shyam105            |
++---------------------+
+5 rows in set (0.002 sec)
+
+MariaDB [department]> select substr('oracle',2,3) from dept;
++----------------------+
+| substr('oracle',2,3) |
++----------------------+
+| rac                  |
+| rac                  |
+| rac                  |
+| rac                  |
+| rac                  |
++----------------------+
+5 rows in set (0.002 sec)
+
+MariaDB [department]> select substr('oracle',2,3);
++----------------------+
+| substr('oracle',2,3) |
++----------------------+
+| rac                  |
++----------------------+
+1 row in set (0.001 sec)
+
+MariaDB [department]> select instr(‘COMPUTER MAINTENANCE CORPORATION’,'A');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'CORPORATION’,'A')' at line 1
+MariaDB [department]> select instr('COMPUTER MAINTENANCE CORPORATION','A');
++-----------------------------------------------+
+| instr('COMPUTER MAINTENANCE CORPORATION','A') |
++-----------------------------------------------+
+|                                            11 |
++-----------------------------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [department]> select replace('Allen's','A','B');
+    '> '
+    -> 
+    -> '
+    '> select replace('Allens','A','B');
+    '> '
+    -> 
+    -> 
+    -> Ctrl-C -- exit!
+Aborted
+add@add-Lenovo-G50-30:~$ sudo /opt/lampp/bin/mysql -u root -p
+[sudo] password for add: 
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 10.4.22-MariaDB Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> select replace(job,'manager','Boss');
+ERROR 1054 (42S22): Unknown column 'job' in 'field list'
+MariaDB [(none)]> select replace(job,'manager','Boss') from dept;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> use department
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [department]> select replace(job,'manager','Boss') from dept;
++-------------------------------+
+| replace(job,'manager','Boss') |
++-------------------------------+
+| clerk                         |
+| salesman                      |
+| Boss                          |
+| analyst                       |
+| clerk                         |
++-------------------------------+
+5 rows in set (0.001 sec)
