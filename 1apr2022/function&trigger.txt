@@ -1,0 +1,212 @@
+mukul@mukul:~$ sudo /opt/lampp/lampp start
+[sudo] password for mukul: 
+Starting XAMPP for Linux 7.4.27-2...
+XAMPP: Starting Apache...already running.
+XAMPP: Starting MySQL...already running.
+XAMPP: Starting ProFTPD...already running.
+mukul@mukul:~$ sudo /opt/lampp/bin/mysql -u root -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 244
+Server version: 10.4.22-MariaDB Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use rdbms;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [rdbms]> delimiter $$
+MariaDB [rdbms]> create function daily_wages(wage decimal(10,2))
+    -> return decimal(10,2)
+    -> deterministic
+    -> begin
+    -> declare daily_wage decimal(10,2);
+    -> set daily_wage=wage*8;
+    -> return (daily_wage);
+    -> end$$
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'return decimal(10,2)
+deterministic
+begin
+declare daily_wage decimal(10,2);
+MariaDB [rdbms]> create function daily_wages(wage decimal(10,2)) returns decimal(10,2) deterministic begin declare daily_wage decimal(MariaMariaDB [rdbms]> create function coustemer_occuption(age int) returns varchar(20) deterministic begin declare customer_occuption varchar(20); if age > 35 then set customer_occuption ='scientist'; elseif (age<=35 and age>=30)then setcustomer_occuption = 'engineer'; elseif age < 30 then set custmer_occuption='actor'; end if; return (custmer_occuption); end$$
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= 'engineer'; elseif age < 30 then set custmer_occuption='actor'; end if; ret...' at line 1
+MariaDB [rdbms]> create function coustemer_occuption(age int) returns varchar(20) deterministic begin declare customer_occuption varchar(20); if age > 35 then set customer_occuption ='scientist'; elseif (age<=35 and age>=30)then setcustomer_occuption = 'engineer'; elseif age < 30 then set customer_occuption='actor'; end if; return (custmer_occuption); end$$
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= 'engineer'; elseif age < 30 then set customer_occuption='actor'; end if; re...' at line 1
+MariaDB [rdbms]> REATE FUNCTION Customer_Occupation(  
+    ->     age int  
+    -> )   
+    -> RETURNS VARCHAR(20)  
+    -> DETERMINISTIC  
+    -> BEGIN  
+    ->     DECLARE customer_occupation VARCHAR(20);  
+    ->     IF age > 35 THEN  
+    ->         SET customer_occupation = 'Scientist';  
+    ->     ELSEIF (age <= 35 AND   
+    ->             age >= 30) THEN  
+    ->         SET customer_occupation = 'Engineer';  
+    ->     ELSEIF age < 30 THEN  
+    ->         SET customer_occupation = 'Actor';  
+    -> END IF;  
+    ->     -- return the customer occupation  
+    ->     RETURN (customer_occupation);  
+    -> end$$
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'REATE FUNCTION Customer_Occupation(  
+    age int  
+)   
+RETURNS VARCHAR(20) ...' at line 1
+MariaDB [rdbms]> CREATE FUNCTION Customer_Occupation(age in) RETURNS VARCHAR(20) DETERMINISTIC BEGIN DECLARE customer_occupation VARCHAR(20); IF age > 35 THEN  SET customer_occupation = 'Scientist';       ELSEIF (age <= 35 AND                age >= 30) THEN           SET customer_occupation = 'Engineer';       ELSEIF age < 30 THEN SET customer_occupation = 'Actor';   END IF;     RETURN (customer_occupation);   end$$
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'in) RETURNS VARCHAR(20) DETERMINISTIC BEGIN DECLARE customer_occupation VARCH...' at line 1
+MariaDB [rdbms]> select daily_wages;
+    -> $$
+ERROR 1054 (42S22): Unknown column 'daily_wages' in 'field list'
+MariaDB [rdbms]> select daily_wages(50);
+    -> select daily_wages(50)$$
++-----------------+
+| daily_wages(50) |
++-----------------+
+|          400.00 |
++-----------------+
+1 row in set (0.001 sec)
+
++-----------------+
+| daily_wages(50) |
++-----------------+
+|          400.00 |
++-----------------+
+1 row in set (0.001 sec)
+
+MariaDB [rdbms]> CREATE FUNCTION Customer_Occupation(  
+    ->     age int  
+    -> )   
+    -> RETURNS VARCHAR(20)  
+    -> DETERMINISTIC  
+    -> BEGIN  
+    ->     DECLARE customer_occupation VARCHAR(20);  
+    ->     IF age > 35 THEN  
+    ->         SET customer_occupation = 'Scientist';  
+    ->     ELSEIF (age <= 35 AND   
+    ->             age >= 30) THEN  
+    ->         SET customer_occupation = 'Engineer';  
+    ->     ELSEIF age < 30 THEN  
+    ->         SET customer_occupation = 'Actor';  
+    -> END IF;  
+    -> RETURN (customer_occupation);  
+    -> END$$  
+Query OK, 0 rows affected (0.032 sec)
+
+MariaDB [rdbms]> DELIMITER;
+    -> DELIMITER ;
+    -> $$
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'DELIMITER;DELIMITER' at line 1
+MariaDB [rdbms]> select daily_wages(50); 
+    -> $$
++-----------------+
+| daily_wages(50) |
++-----------------+
+|          400.00 |
++-----------------+
+1 row in set (0.000 sec)
+
+MariaDB [rdbms]> DELIMITER;
+    -> Aborted
+mukul@mukul:~$ DELIMITER ;
+DELIMITER: command not found
+mukul@mukul:~$ DELIMITER;
+DELIMITER: command not found
+mukul@mukul:~$ delimiter;
+delimiter: command not found
+mukul@mukul:~$ sudo /opt/lampp/bin/mysql -u root -p
+[sudo] password for mukul: 
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 253
+Server version: 10.4.22-MariaDB Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> DELIMITER;
+ERROR: DELIMITER must be followed by a 'delimiter' character or string
+MariaDB [(none)]> DELIMITER $
+MariaDB [(none)]> DELIMITER ;
+MariaDB [(none)]> SELECT name, age, Customer_Occupation(age)  
+    -> FROM customer ORDER BY age;
+ERROR 1305 (42000): FUNCTION Customer_Occupation does not exist
+MariaDB [(none)]> SELECT name, age, customer_occupation(age)   FROM customer ORDER BY age;
+ERROR 1305 (42000): FUNCTION customer_occupation does not exist
+MariaDB [(none)]> use rdbms;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [rdbms]> alter table coustmer add age bigint(10);
+Query OK, 0 rows affected (0.017 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [rdbms]> alter table coustmer add name  varchar(50);
+Query OK, 0 rows affected (0.026 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [rdbms]> SELECT name, age, customer_occupation(age)   FROM customer ORDER BY age;
+ERROR 1146 (42S02): Table 'rdbms.customer' doesn't exist
+MariaDB [rdbms]> SELECT name, age, customer_occupation(age)   FROM coustmer ORDER BY age;
++------+------+--------------------------+
+| name | age  | customer_occupation(age) |
++------+------+--------------------------+
+| NULL | NULL | NULL                     |
+| NULL | NULL | NULL                     |
+| NULL | NULL | NULL                     |
+| NULL | NULL | NULL                     |
+| NULL | NULL | NULL                     |
+| NULL | NULL | NULL                     |
+| NULL | NULL | NULL                     |
+| NULL | NULL | NULL                     |
+| NULL | NULL | NULL                     |
+| NULL | NULL | NULL                     |
++------+------+--------------------------+
+10 rows in set (0.002 sec)
+
+MariaDB [rdbms]> create table people(age int,name varchar(150));
+Query OK, 0 rows affected (0.016 sec)
+
+MariaDB [rdbms]> create trigger agecheck before insert on people for each row if new.age<0
+    -> then set new.age=0;end if;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 2
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'end if' at line 1
+MariaDB [rdbms]> delimiter//
+    -> delimiter//
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'delimiter//delimiter//' at line 1
+MariaDB [rdbms]> delimiter//
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'delimiter//' at line 1
+MariaDB [rdbms]> delimiter $
+MariaDB [rdbms]> create trigger agecheck before insert on people for each row if new.age<0
+    -> then set new.age=0;
+    -> endif;$
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 3
+MariaDB [rdbms]> CREATE TRIGGER agecheck BEFORE INSERT ON people FOR EACH ROW IF NEW.age < 0 
+    -> THEN SET NEW.age = 0;
+    -> end if;$
+Query OK, 0 rows affected (0.010 sec)
+
+MariaDB [rdbms]> delimiter ;
+MariaDB [rdbms]> INSERT INTO people VALUES (-20, ‘Sid’), (30, ‘Josh’);
+ERROR 1054 (42S22): Unknown column '‘Sid’' in 'field list'
+MariaDB [rdbms]> INSERT INTO people VALUES (-20, 'Sid'), (30, 'Josh');
+Query OK, 2 rows affected (0.015 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [rdbms]> select * from  people;
++------+------+
+| age  | name |
++------+------+
+|    0 | Sid  |
+|   30 | Josh |
++------+------+
+2 rows in set (0.001 sec)

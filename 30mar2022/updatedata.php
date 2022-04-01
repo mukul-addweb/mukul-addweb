@@ -27,7 +27,9 @@ if(isset($_POST['Insert']))
     $type = $_POST['type'];
     $expire = $_POST['expire'];
     $con = mysqli_connect("localhost","root","","rdbms") or die("error in connection");
-    $query= mysqli_query($con,"update bottle set bottle_name='$name', bottle_brand='$brand', bottle_price='$price', type=$type, expire='$expire' where brand_id=$id") or die ("error in query");
+    $abc="update bottle set bottle_name='$name', bottle_brand='$brand', bottle_price=$price, type='$type', expire=$expire where bottle_id=$id";
+    //echo $abc;
+    $query= mysqli_query($con,$abc) or die ("error in query");
     if($query)
     {
         echo "<script>alert('data updated successfully');</script>";
